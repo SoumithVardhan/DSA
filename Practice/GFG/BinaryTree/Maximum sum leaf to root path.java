@@ -151,6 +151,7 @@ class Solution {
         
         int currlen=root.data+Math.max(ans1,ans2);
         maxsum=Math.max(maxsum,currlen);
+        //even this statement is imp matters in other rec calls
         return currlen;
         
     }
