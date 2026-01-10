@@ -1,3 +1,4 @@
+// Blind 75 LeetCode Questions
 package Practice.DP.LeetCode;
 
 class Solution {
@@ -57,6 +58,22 @@ class Solution {
         return solve(m,n);
     }
 
-    
+    public int solveopt(int m,int n){
+        int[] tabulation=new int[n];
+        for(int i=m-1;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
+                if(i==m-1 && j==n-1)tabulation[j]=1;
+                else if(j==n-1)tabulation[j]=1;
+                else if(i==m-1)tabulation[j]=1;
+                else{
+                    tabulation[j]=tabulation[j]+tabulation[j+1];
+                }
+            }
+        }
+        return tabulation[0];
+    }
+    public int uniquePathstabulationopt(int m, int n) {
+        return solveopt(m,n);
+    }
 
 }
