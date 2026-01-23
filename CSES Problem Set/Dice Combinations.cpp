@@ -24,13 +24,13 @@ int main(){
 }
 
 //Memoization approach
-int solverec(int remsum, vector<int>&dp){
+int solvememo(int remsum, vector<int>&dp){
     if(remsum<0) return 0;
     if(remsum==0) return 1;
     if(dp[remsum]!=0) return dp[remsum];
     int sum=0;
     for(int i=1;i<=6;i++){
-        sum=(sum+solverec(remsum-i,dp))%mod;
+        sum=(sum+solvememo(remsum-i,dp))%mod;
     }
     return dp[remsum]=sum%mod;
 }
@@ -39,7 +39,7 @@ int main(){
     cin>>n;
     int remsum=n;
     vector<int>dp(n+1);
-    cout<<solverec(remsum,dp)<<endl;
+    cout<<solvememo(remsum,dp)<<endl;
     return 0;
 }
 
