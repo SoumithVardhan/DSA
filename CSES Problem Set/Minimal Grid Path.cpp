@@ -291,3 +291,133 @@ int main(){
     cout<<solveDiagonalGreedy(grid,n)<<endl;
     return 0;
 }
+
+// Radix Sort 
+// #include <iostream>
+// #include <vector>
+// #include <string>
+// #include <algorithm>
+// #include <climits>
+// using namespace std;
+
+// struct Cell {
+//     int i, j;
+//     char ch;
+//     int order;
+    
+//     Cell(int _i, int _j, char _ch, int _order) : i(_i), j(_j), ch(_ch), order(_order) {}
+// };
+
+// // Comparator for sorting cells
+// struct CellComparator {
+//     vector<vector<int> >* orderPtr;
+//     int n;
+    
+//     CellComparator(vector<vector<int> >* o, int _n) : orderPtr(o), n(_n) {}
+    
+//     bool operator()(const Cell& a, const Cell& b) const {
+//         // First compare by character
+//         if(a.ch != b.ch) return a.ch < b.ch;
+        
+//         // If same character, compare by order of best next cell
+//         int orderA = INT_MAX, orderB = INT_MAX;
+        
+//         // Best order from cell a
+//         if(a.i + 1 < n) orderA = min(orderA, (*orderPtr)[a.i + 1][a.j]);
+//         if(a.j + 1 < n) orderA = min(orderA, (*orderPtr)[a.i][a.j + 1]);
+        
+//         // Best order from cell b
+//         if(b.i + 1 < n) orderB = min(orderB, (*orderPtr)[b.i + 1][b.j]);
+//         if(b.j + 1 < n) orderB = min(orderB, (*orderPtr)[b.i][b.j + 1]);
+        
+//         return orderA < orderB;
+//     }
+// };
+
+// string solveRadixSort(vector<vector<char> >& grid, int n) {
+//     vector<vector<int> > order(n, vector<int>(n, 0));
+    
+//     // Process diagonals BACKWARDS
+//     for(int d = 2*n - 2; d >= 0; d--) {
+//         int iStart = max(0, d - n + 1);
+//         int iEnd = min(d, n - 1);
+        
+//         vector<Cell> cells;
+        
+//         // Collect all cells on this diagonal
+//         for(int i = iStart; i <= iEnd; i++) {
+//             int j = d - i;
+//             cells.push_back(Cell(i, j, grid[i][j], 0));
+//         }
+        
+//         // Sort cells by (character, best_neighbor_order)
+//         CellComparator comp(&order, n);
+//         sort(cells.begin(), cells.end(), comp);
+        
+//         // Assign order numbers based on sorted position
+//         for(size_t k = 0; k < cells.size(); k++) {
+//             if(k > 0 && cells[k].ch == cells[k-1].ch) {
+//                 // Check if neighbor orders are also same
+//                 int orderCurr = INT_MAX, orderPrev = INT_MAX;
+                
+//                 if(cells[k].i + 1 < n) orderCurr = min(orderCurr, order[cells[k].i + 1][cells[k].j]);
+//                 if(cells[k].j + 1 < n) orderCurr = min(orderCurr, order[cells[k].i][cells[k].j + 1]);
+                
+//                 if(cells[k-1].i + 1 < n) orderPrev = min(orderPrev, order[cells[k-1].i + 1][cells[k-1].j]);
+//                 if(cells[k-1].j + 1 < n) orderPrev = min(orderPrev, order[cells[k-1].i][cells[k-1].j + 1]);
+                
+//                 if(orderCurr == orderPrev) {
+//                     order[cells[k].i][cells[k].j] = order[cells[k-1].i][cells[k-1].j];
+//                 } else {
+//                     order[cells[k].i][cells[k].j] = k;
+//                 }
+//             } else {
+//                 order[cells[k].i][cells[k].j] = k;
+//             }
+//         }
+//     }
+    
+//     // Reconstruct path
+//     string result = "";
+//     int i = 0, j = 0;
+    
+//     while(i < n - 1 || j < n - 1) {
+//         result += grid[i][j];
+        
+//         bool goDown = false;
+        
+//         if(i + 1 >= n) {
+//             goDown = false;
+//         } else if(j + 1 >= n) {
+//             goDown = true;
+//         } else {
+//             goDown = (order[i + 1][j] < order[i][j + 1]);
+//         }
+        
+//         if(goDown) i++;
+//         else j++;
+//     }
+    
+//     result += grid[n-1][n-1];
+    
+//     return result;
+// }
+
+// int main() {
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+    
+//     int n;
+//     cin >> n;
+    
+//     vector<vector<char> > grid(n, vector<char>(n));
+//     for(int i = 0; i < n; i++) {
+//         for(int j = 0; j < n; j++) {
+//             cin >> grid[i][j];
+//         }
+//     }
+    
+//     cout << solveRadixSort(grid, n) << endl;
+    
+//     return 0;
+// }
