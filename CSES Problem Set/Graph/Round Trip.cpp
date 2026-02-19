@@ -113,3 +113,7 @@ int main() {
     
     return 0;
 }
+
+// If after DFS you wanted to reconstruct the path from parent to child for every node. 
+// But in our case we already have the path array doing that job.
+// So we replaced parent array with just a single integer passed in recursion. Cleaner and simpler!
