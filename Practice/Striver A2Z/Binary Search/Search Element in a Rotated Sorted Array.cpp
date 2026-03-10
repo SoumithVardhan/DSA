@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-// Standard binary search
+// Himanshu Sir Approach
 int binarySearch(vector<int>& arr, int low, int high, int k) {
     while(low <= high) {
         int mid = (low + high) / 2;

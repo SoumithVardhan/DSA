@@ -5,6 +5,7 @@ using namespace std;
 // TC: O(log n)
 // SC: O(1)
 // Find first occurrence of x
+// Himanshu Sir Approach
 int firstOccurrence(vector<int>& arr, int n, int x) {
     int low = 0, high = n - 1;
     int first = -1;

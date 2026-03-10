@@ -2,6 +2,7 @@
 #include<vector>
 using namespace std;
 
+// Himanshu Sir Approach
 int findMin(vector<int>& arr) {
     int low = 0, high = arr.size() - 1;
 
